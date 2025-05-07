@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown转Word文档工具 | 在线编辑与转换</title>
+    <meta name="description" content="一个简单易用的Markdown编辑器和转换工具，支持编辑Markdown内容并导出为Word文档格式(.docx)，无需安装软件，完全在浏览器中运行">
+    <meta name="keywords" content="markdown, word, docx, 转换, 编辑器, 在线工具, markdown编辑, 文档转换">
+    <meta name="clipboard-read" content="allow">
+    <meta name="clipboard-write" content="allow">
+    <!-- Favicon - 内联base64编码的图标 -->
+    <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWQxIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3R5bGU9InN0b3AtY29sb3I6IzRhNmVlMDtzdG9wLW9wYWNpdHk6MSIgLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMmM0YWEzO3N0b3Atb3BhY2l0eToxIiAvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICAgIDxmaWx0ZXIgaWQ9InNoYWRvdyIgeD0iLTEwJSIgeT0iLTEwJSIgd2lkdGg9IjEyMCUiIGhlaWdodD0iMTIwJSI+CiAgICAgIDxmZUdhdXNzaWFuQmx1ciBpbj0iU291cmNlQWxwaGEiIHN0ZERldmlhdGlvbj0iMyIgLz4KICAgICAgPGZlT2Zmc2V0IGR4PSIxIiBkeT0iMSIgcmVzdWx0PSJvZmZzZXRibHVyIiAvPgogICAgICA8ZmVDb21wb3NpdGUgaW49IlNvdXJjZUdyYXBoaWMiIGluMj0ib2Zmc2V0Ymx1ciIgb3BlcmF0b3I9Im92ZXIiIC8+CiAgICA8L2ZpbHRlcj4KICA8L2RlZnM+CiAgPHJlY3QgeD0iMTAiIHk9IjEwIiB3aWR0aD0iNDQiIGhlaWdodD0iNDQiIHJ4PSI4IiByeT0iOCIgZmlsbD0idXJsKCNncmFkMSkiIGZpbHRlcj0idXJsKCNzaGFkb3cpIiAvPgogIDxwYXRoIGQ9Ik0yMCAxOEw0MCAxOGwyLTJIMTh6TTIwIDI2TDM2IDI2bDItMkgxOHpNMjAgMzRMNDQgMzRsMi0ySDE4eiIgZmlsbD0iI2ZmZiIgZmlsbC1vcGFjaXR5PSIwLjciIC8+CiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIsIDMyKSI+CiAgICA8cGF0aCBkPSJNLTggLThMOCA4IiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiAvPgogICAgPHBhdGggZD0iTS04IDhMOCAtOCIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgLz4KICA8L2c+Cjwvc3ZnPg==" type="image/svg+xml">
+    <!-- 备用小尺寸favicon -->
+    <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAADdUlEQVRYR8WXS2hUWRSG/3Pr3ltJOt3YL3DUhajgIF18TKIoKriYjQuNiCLiwo0LceFGEEQXggsXbiSCIogIgqAbiYgL0UV8IIrYGUVBfIC6UaND0p3kdp17ZarSlaS6KnaqKgcuFNyqc8/3n/8/jzrsf37Yv9wfQwjAuWCj5/G3yWQjlLKnAHqhtYWFMmr3/wjnXAohjidJcqG5uTmVSj2xEfg8ER0FUW/RZ35l6LyA1roppfxFKRUNDAyMJEli0un0N/Pz81+llBsLBZZ+5y7YUkpFSZKMGWOeMcaEMWYkSZL3UsrVQohN3wxQyE4I4VLKYwCOAkCpVHpbq9UuFovF4YWYFo2A1roTwEngKxRFOV2pVH7zPO9kGIaPFq2CQk5CCAPADMP8MTJS2uX7/p4gCB4vKYCPLsaYR0QXiWh/q63vAaiSgWu58q1CqJLu2RKY7/tQSsF1XViWJQA4i5YBrfUPRUG33JBtM6uJrj8MYyGsaZom07FtG1LKT0SUstY+X9ICxpiFX+r7EL4Pg0aZjBhjxGZrSTb2H4oiW0qJRqPxPE3TVYyxFy0APHJ2TpDWHk3i+G65XH7W1dXVFwTBPqUU7u2bAtsuIADUVTJ+bE3PrR/DMPy5rdOwVCr1TE5O3mu+D4Kga2hoyP2+S2v9fS6wlPKCMeZiS37+bcbYf+1YalcFuy3L+rlSqdxtJ9Rau+y8bK7KZrP5fT6fP9VWBbZtn0mS5Nw/zYGsFpxze3Bw8CBjrLstQBRFe2u12vVOUZDP50/7vn+mbRXkcrnB8fHxW52CZrPZw0EQnG/PAcdxhlFjlzSLGNuQpOnh4N1bGGPGTFe3w1h5leuWD2QtPsQwOzs8EkWZfY5j0Y01veZVFBUxNbkFjMXPmppWrJ1+MTS5ZdPT08fn5nKntJYPRkY6x6anW7tz3zcPp6ez+xwngcGg/IEJ+Ac+FcQWfP31hTQ1B2MfN9QVL+QLeWiMH8fxpU9twBhDqVQaHxuL7jPGDrvuGc+j7mq1uqNYLLrm85ExNmG0OQC4D3AYjQRRdD4Mw0M9PT3jptFoLKtWq1s9z7vZ29t7xHXdvR0BaHcbxvFdpdS1IAiu5nK5k0TU3wHgBBH9TkQfMmEsTcBYOcO5ZRNZdYIiHN4zSJN/Aagm3SbJ4PnVAAAAAElFTkSuQmCC" sizes="32x32">
+    <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABnUlEQVQ4T6WSvUtCURjGn+NeL3nlkqsfoEMQtEZEUC0VQSAt4dRWNERrQUtDgUNDEPQHtDREDg0NLTVEgdRQEFhkiGlZWKbX7r0950MuXfVC0YHDe97zPr/3PYeQc878/Dn6M4D0T8r5QGu9aIzZYYzVhRCXvu9XGWMbSqkNIlohogPG2EWr1bo2xCilnOI4Pg3DcPJ5NKTt0d7pPcFzHEzPzYOIbgFMK6XAOYcQArZtnziOU06SBGmaIggCkwICAFLKHSnl5vDw0KjruiulUmnej+NYAzjzPG/eZjabfYjj+GFgYGA0iiJfKXXV6XQWgiBopWk6maYpHMcZm5mZ3bMsaxkAiIgeXdfdFtls9poxlndd9+ApDHuTGRueGaKBigqzJEnw1A9Rf36BZlK/0Vp/CJ7n7WaEeLnpdPa73e5NIecDtgXbtmHbFizLgmUxMMaw/xLCe/ePLzSBhDFdQP8TIYQmIr0ipVwvFArF5+fnqyiKWs9p+lpI0xSUgrZqMbYupVz1fX9Ja11kjJ2KeuMYQAPAD631FxGdEVHrDZ/fOdYXzqwOqQh3i+QAAAAASUVORK5CYII=" sizes="16x16">
+    <!-- iOS设备主屏幕图标 -->
+    <link rel="apple-touch-icon" href="data:image/png;base64,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" />
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Markdown解析库 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/markdown-it/13.0.1/markdown-it.min.js"></script>
+    <!-- 文件保存库 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <!-- 使用更简单、直接的HTML转换方法 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <!-- HTML到Markdown转换工具 -->
+    <script src="https://unpkg.com/turndown@7.1.2/dist/turndown.js"></script>
+
+    <!-- 内联脚本实现转换功能 -->
+    <script>
+        // 简化的DOCX生成逻辑，直接创建一个最小化的docx文件
+        window.exportHtmlToDocx = function(htmlContent, callback) {
+            try {
+                console.log("开始导出HTML为DOCX...");
+                // 创建HTML文件供下载
+                createDownloadableHtml(htmlContent, callback);
+            } catch (e) {
+                console.error("HTML导出失败:", e);
+                callback(null);
+            }
+        };
+        
+        // 创建可下载的HTML文件，添加特殊处理使Word打开时能正确显示格式
+        function createDownloadableHtml(htmlContent, callback) {
+            try {
+                // 添加一些Word特定的元数据和样式，以改善导入Word的效果
+                const wordCompatibleHtml = `<!DOCTYPE html>
+                <html xmlns:o="urn:schemas-microsoft-com:office:office" 
+                      xmlns:w="urn:schemas-microsoft-com:office:word"
+                      xmlns:m="http://schemas.microsoft.com/office/2004/12/omml"
+                      xmlns="http://www.w3.org/TR/REC-html40">
+                <head>
+                    <meta charset="utf-8">
+                    <meta name="ProgId" content="Word.Document">
+                    <meta name="Generator" content="Microsoft Word 15">
+                    <meta name="Originator" content="Microsoft Word 15">
+                    <!-- 引导Word使用这些设置 -->
+                    <xml>
+                    <w:WordDocument>
+                        <w:View>Print</w:View>
+                        <w:Zoom>100</w:Zoom>
+                        <w:DoNotOptimizeForBrowser/>
+                    </w:WordDocument>
+                    </xml>
+                    <style>
+                        /* 重置样式 */
+                        * {
+                            margin: 0;
+                            padding: 0;
+                            box-sizing: border-box;
+                        }
+                        
+                        /* 基础文档样式 */
+                        body {
+                            font-family: 'SimSun', 'Times New Roman', serif;
+                            font-size: 12pt;
+                            line-height: 1.3;
+                            color: #000000;
+                            background-color: white;
+                            padding: 2.54cm;
+                        }
+                        
+                        /* 标题样式 */
+                        h1, h2, h3, h4, h5, h6 {
+                            font-weight: bold;
+                            margin-top: 12pt;
+                            margin-bottom: 6pt;
+                            page-break-after: avoid;
+                        }
+                        
+                        h1 { font-size: 18pt; }
+                        h2 { font-size: 16pt; }
+                        h3 { font-size: 14pt; }
+                        h4, h5, h6 { font-size: 12pt; }
+                        
+                        /* 段落样式 */
+                        p {
+                            margin-top: 0;
+                            margin-bottom: 6pt;
+                        }
+                        
+                        /* 列表样式，强制使用正确的项目符号 */
+                        ul {
+                            margin-top: 3pt;
+                            margin-bottom: 3pt;
+                            padding-left: 20pt;
+                            list-style-type: disc !important;
+                            -webkit-padding-start: 20pt;
+                            -moz-padding-start: 20pt;
+                        }
+                        
+                        ol {
+                            margin-top: 3pt;
+                            margin-bottom: 3pt;
+                            padding-left: 20pt;
+                            list-style-type: decimal !important;
+                            -webkit-padding-start: 20pt;
+                            -moz-padding-start: 20pt;
+                        }
+                        
+                        li {
+                            margin-top: 2pt;
+                            margin-bottom: 2pt;
+                            display: list-item;
+                            text-indent: 0;
+                        }
+                        
+                        /* 强制嵌套列表样式，并减小间距 */
+                        ul ul, ol ul { 
+                            list-style-type: circle !important; 
+                            margin-top: 0 !important;
+                            margin-bottom: 0 !important;
+                            padding-left: 16pt !important;
+                        }
+                        
+                        ol ol, ul ol { 
+                            list-style-type: lower-alpha !important; 
+                            margin-top: 0 !important;
+                            margin-bottom: 0 !important;
+                            padding-left: 16pt !important;
+                        }
+                        
+                        ul ul ul { 
+                            list-style-type: square !important; 
+                            padding-left: 16pt !important;
+                        }
+                        
+                        /* 嵌套列表项样式 */
+                        ul li li, ol li li {
+                            margin-top: 0 !important;
+                            margin-bottom: 0 !important;
+                            padding-top: 1pt !important;
+                            padding-bottom: 1pt !important;
+                            line-height: 1.2 !important;
+                        }
+                        
+                        /* 表格样式 */
+                        table {
+                            border-collapse: collapse;
+                            width: 100%;
+                            margin-top: 8pt;
+                            margin-bottom: 8pt;
+                        }
+                        
+                        td, th {
+                            border: 1px solid #000000;
+                            padding: 4pt;
+                            vertical-align: top;
+                        }
+                        
+                        th {
+                            font-weight: bold;
+                            background-color: #f2f2f2;
+                        }
+                        
+                        /* 其他元素样式 */
+                        blockquote {
+                            margin: 8pt 12pt;
+                            padding-left: 12pt;
+                            border-left: 4px solid #ddd;
+                            color: #666;
+                        }
+                        
+                        pre {
+                            background-color: #f5f5f5;
+                            padding: 8pt;
+                            overflow-x: auto;
+                            font-family: 'Courier New', monospace;
+                            margin: 8pt 0;
+                            white-space: pre-wrap;
+                        }
+                        
+                        code {
+                            font-family: 'Courier New', monospace;
+                            background-color: #f5f5f5;
+                            padding: 2pt 4pt;
+                            font-size: 10pt;
+                        }
+                        
+                        img {
+                            max-width: 100%;
+                            height: auto;
+                        }
+                        
+                        a {
+                            color: #0563c1;
+                            text-decoration: underline;
+                        }
+                        
+                        /* Word特定的MSO样式 */
+                        @page {
+                            size: 21.0cm 29.7cm;
+                            margin: 2.54cm 3.18cm 2.54cm 3.18cm;
+                            mso-page-orientation: portrait;
+                        }
+                        
+                        /* 自定义特殊样式修复 */
+                        *.MsoListParagraph {
+                            margin-left: 36.0pt;
+                            text-indent: -18.0pt;
+                        }
+                    </style>
+                </head>
+                <body>
+                <!-- 直接显示内容，不显示提示语 -->
+                ${htmlContent}
+                </body>
+                </html>`;
+                
+                // 创建Blob对象
+                const blob = new Blob([wordCompatibleHtml], {type: 'text/html'});
+                callback(blob);
+                return true;
+            } catch (error) {
+                console.error("创建Word兼容HTML失败:", error);
+                callback(null);
+                return false;
+            }
+        }
+        
+        // 为JavaScript提供新的接口以使用简化的导出功能
+        window.convertHtmlToDocx = function(htmlContent, callback) {
+            try {
+                // 最初将内容优化为适合Word的格式
+                const processedHtml = optimizeHtmlForWord(htmlContent);
+                
+                // 直接使用HTML导出作为首选方法
+                window.exportHtmlToDocx(processedHtml, (blob) => {
+                    if (blob) {
+                        callback(blob);
+                    } else {
+                        callback(null);
+                    }
+                });
+                
+                return true;
+            } catch (e) {
+                console.error("DOCX转换失败:", e);
+                callback(null);
+                return false;
+            }
+        };
+        
+        // 优化HTML内容以便在Word中有更好的显示效果
+        function optimizeHtmlForWord(html) {
+            try {
+                // 创建临时DOM解析HTML
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = html;
+                
+                // 确保无序列表使用正确的项目符号
+                tempDiv.querySelectorAll('ul').forEach((list, listIndex) => {
+                    // 给无序列表添加明确的disc样式
+                    list.setAttribute('style', 'list-style-type: disc !important; margin-left: 20pt; margin-top: 3pt; margin-bottom: 3pt;');
+                    list.setAttribute('type', 'disc');
+                    
+                    // 处理列表项
+                    list.querySelectorAll(':scope > li').forEach(li => {
+                        li.setAttribute('style', 'display: list-item !important; list-style-type: disc !important; margin-top: 2pt; margin-bottom: 2pt;');
+                        
+                        // 使用不同符号处理嵌套列表 - 优化二级列表的间距
+                        li.querySelectorAll(':scope > ul').forEach((nestedUl) => {
+                            nestedUl.setAttribute('style', 'list-style-type: circle !important; margin-left: 16pt !important; margin-top: 0 !important; margin-bottom: 0 !important; padding-top: 0 !important; padding-bottom: 0 !important;');
+                            nestedUl.setAttribute('type', 'circle');
+                            
+                            // 特别处理二级列表项，减小间距，解决制表符问题
+                            nestedUl.querySelectorAll(':scope > li').forEach(nestedLi => {
+                                nestedLi.setAttribute('style', 'display: list-item !important; list-style-type: circle !important; margin-top: 0 !important; margin-bottom: 0 !important; padding-top: 1pt !important; padding-bottom: 1pt !important; line-height: 1.2 !important; text-indent: 0 !important;');
+                                
+                                // 解决项目符号和内容间距问题 - 直接控制内容
+                                const liContentWrapper = document.createElement('span');
+                                liContentWrapper.setAttribute('style', 'display: inline-block; padding-left: 0;');
+                                
+                                // 移动所有子节点到包装器，并确保没有制表符
+                                while (nestedLi.childNodes.length > 0) {
+                                    // 如果是文本节点，处理可能存在的制表符
+                                    if (nestedLi.childNodes[0].nodeType === 3) { // 文本节点
+                                        let textContent = nestedLi.childNodes[0].textContent;
+                                        textContent = textContent.replace(/^\s+/, ' '); // 将开头的所有空白字符替换为单个空格
+                                        textContent = textContent.replace(/\t+/g, ' '); // 替换所有制表符为一个空格
+                                        const textNode = document.createTextNode(textContent);
+                                        liContentWrapper.appendChild(textNode);
+                                        nestedLi.removeChild(nestedLi.childNodes[0]);
+                                    } else {
+                                        liContentWrapper.appendChild(nestedLi.childNodes[0]);
+                                    }
+                                }
+                                
+                                // 将包装好的内容添加回列表项
+                                nestedLi.appendChild(liContentWrapper);
+                            });
+                            
+                            // 三级嵌套列表处理
+                            nestedUl.querySelectorAll(':scope > li > ul').forEach(thirdUl => {
+                                thirdUl.setAttribute('style', 'list-style-type: square !important; margin-left: 16pt !important; margin-top: 0 !important; margin-bottom: 0 !important;');
+                                thirdUl.setAttribute('type', 'square');
+                                
+                                thirdUl.querySelectorAll(':scope > li').forEach(thirdLi => {
+                                    thirdLi.setAttribute('style', 'display: list-item !important; list-style-type: square !important; margin-top: 0 !important; margin-bottom: 0 !important; padding-top: 1pt !important; padding-bottom: 1pt !important; line-height: 1.2 !important; text-indent: 0 !important;');
+                                    
+                                    // 对三级列表项也应用相同的制表符修复
+                                    const thirdLiContentWrapper = document.createElement('span');
+                                    thirdLiContentWrapper.setAttribute('style', 'display: inline-block; padding-left: 0;');
+                                    
+                                    while (thirdLi.childNodes.length > 0) {
+                                        if (thirdLi.childNodes[0].nodeType === 3) {
+                                            let textContent = thirdLi.childNodes[0].textContent;
+                                            textContent = textContent.replace(/^\s+/, ' ');
+                                            textContent = textContent.replace(/\t+/g, ' ');
+                                            const textNode = document.createTextNode(textContent);
+                                            thirdLiContentWrapper.appendChild(textNode);
+                                            thirdLi.removeChild(thirdLi.childNodes[0]);
+                                        } else {
+                                            thirdLiContentWrapper.appendChild(thirdLi.childNodes[0]);
+                                        }
+                                    }
+                                    
+                                    thirdLi.appendChild(thirdLiContentWrapper);
+                                });
+                            });
+                        });
+                    });
+                });
+                
+                // 确保有序列表使用正确的编号
+                tempDiv.querySelectorAll('ol').forEach((list, listIndex) => {
+                    list.setAttribute('style', 'list-style-type: decimal !important; margin-left: 20pt; margin-top: 3pt; margin-bottom: 3pt;');
+                    list.setAttribute('type', '1');
+                    
+                    list.querySelectorAll(':scope > li').forEach(li => {
+                        li.setAttribute('style', 'display: list-item !important; list-style-type: decimal !important; margin-top: 2pt; margin-bottom: 2pt;');
+                        
+                        // 嵌套有序列表 - 优化二级有序列表间距
+                        li.querySelectorAll(':scope > ol').forEach(nestedOl => {
+                            nestedOl.setAttribute('style', 'list-style-type: lower-alpha !important; margin-left: 16pt !important; margin-top: 0 !important; margin-bottom: 0 !important;');
+                            nestedOl.setAttribute('type', 'a');
+                            
+                            // 为有序列表的嵌套项也应用相同的制表符修复
+                            nestedOl.querySelectorAll(':scope > li').forEach(nestedLi => {
+                                nestedLi.setAttribute('style', 'display: list-item !important; list-style-type: lower-alpha !important; margin-top: 0 !important; margin-bottom: 0 !important; padding-top: 1pt !important; padding-bottom: 1pt !important; line-height: 1.2 !important; text-indent: 0 !important;');
+                                
+                                const liContentWrapper = document.createElement('span');
+                                liContentWrapper.setAttribute('style', 'display: inline-block; padding-left: 0;');
+                                
+                                while (nestedLi.childNodes.length > 0) {
+                                    if (nestedLi.childNodes[0].nodeType === 3) {
+                                        let textContent = nestedLi.childNodes[0].textContent;
+                                        textContent = textContent.replace(/^\s+/, ' ');
+                                        textContent = textContent.replace(/\t+/g, ' ');
+                                        const textNode = document.createTextNode(textContent);
+                                        liContentWrapper.appendChild(textNode);
+                                        nestedLi.removeChild(nestedLi.childNodes[0]);
+                                    } else {
+                                        liContentWrapper.appendChild(nestedLi.childNodes[0]);
+                                    }
+                                }
+                                
+                                nestedLi.appendChild(liContentWrapper);
+                            });
+                        });
+                    });
+                });
+
+                // 全局移除所有列表项中的制表符
+                tempDiv.querySelectorAll('li').forEach(li => {
+                    // 处理所有直接文本子节点
+                    Array.from(li.childNodes).forEach(node => {
+                        if (node.nodeType === 3) { // 文本节点
+                            node.textContent = node.textContent
+                                .replace(/^\s+/, ' ') // 替换开头空白为单个空格
+                                .replace(/\s+$/, ' ') // 替换结尾空白为单个空格
+                                .replace(/\t+/g, ' '); // 替换所有制表符为一个空格
+                        }
+                    });
+                });
+                
+                return tempDiv.innerHTML;
+            } catch (error) {
+                console.error("优化HTML失败:", error);
+                return html; // 发生错误时返回原始HTML
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <i class="fas fa-file-word"></i>
+                <i class="fas fa-exchange-alt"></i>
+                <i class="fab fa-markdown"></i>
+            </div>
+            <h1>Markdown转Word工具</h1>
+            <p class="subtitle">一个简单易用的Markdown编辑与转换工具</p>
+        </div>
+        
+        <div class="button-container">
+            <button id="import-btn" class="action-btn">
+                <i class="fas fa-file-import"></i>
+                导入
+            </button>
+            <button id="edit-btn" class="action-btn">
+                <i class="fas fa-edit"></i>
+                编辑
+            </button>
+            <button id="preview-btn" class="action-btn">
+                <i class="fas fa-eye"></i>
+                预览
+            </button>
+            <button id="convert-btn" class="action-btn">
+                <i class="fas fa-file-export"></i>
+                转换
+            </button>
+        </div>
+        
+        <div class="main-content">
+            <div id="import-section" class="section active">
+                <div class="file-upload-container">
+                    <div class="file-upload-box">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>选择markdown文件</p>
+                        <p class="small">点击或拖拽文件到此区域</p>
+                        <input type="file" id="file-input" accept=".md,.markdown" style="display: none;">
+                    </div>
+                    <div class="import-options">
+                        <button id="clipboard-import" class="import-option-btn">
+                            <i class="fas fa-clipboard"></i> 从剪贴板导入
+                        </button>
+                        <button id="manual-paste" class="import-option-btn">
+                            <i class="fas fa-paste"></i> 手动粘贴
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="edit-section" class="section">
+                <div class="editor-container">
+                    <div class="editor-toolbar">
+                        <button data-action="bold" title="加粗"><i class="fas fa-bold"></i></button>
+                        <button data-action="italic" title="斜体"><i class="fas fa-italic"></i></button>
+                        <button data-action="heading" title="标题"><i class="fas fa-heading"></i></button>
+                        <button data-action="quote" title="引用"><i class="fas fa-quote-right"></i></button>
+                        <button data-action="ul" title="无序列表"><i class="fas fa-list-ul"></i></button>
+                        <button data-action="ol" title="有序列表"><i class="fas fa-list-ol"></i></button>
+                        <button data-action="link" title="链接"><i class="fas fa-link"></i></button>
+                        <button data-action="image" title="图片"><i class="fas fa-image"></i></button>
+                        <button data-action="code" title="代码块"><i class="fas fa-code"></i></button>
+                        <button data-action="fullscreen" title="全屏编辑"><i class="fas fa-expand"></i></button>
+                        <button data-action="help" title="帮助"><i class="fas fa-question"></i></button>
+                    </div>
+                    <textarea id="editor" placeholder="在此输入或粘贴Markdown内容..."></textarea>
+                    <div class="editor-stats">
+                        <span id="char-count">字数: 0</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="preview-section" class="section">
+                <div class="preview-container">
+                    <div id="preview-content"></div>
+                </div>
+            </div>
+            
+            <div id="convert-section" class="section">
+                <div class="convert-options">
+                    <h3>下载选项</h3>
+                    <div class="download-options">
+                        <button id="download-md" class="download-btn">
+                            <i class="fab fa-markdown"></i>
+                            .md
+                        </button>
+                        <button id="download-docx" class="download-btn">
+                            <i class="fas fa-file-word"></i>
+                            .docx
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html> 
